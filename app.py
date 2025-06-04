@@ -23,7 +23,7 @@ output_queue = queue.Queue()
 def run_sensor_script():
   try:
     process = subprocess.Popen(
-      ["python", "./script.py"],
+      ["python", "-u", "script.py"],
       stdout=subprocess.PIPE,
       stderr=subprocess.PIPE,
       universal_newlines=True,
