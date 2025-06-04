@@ -3,6 +3,7 @@ import subprocess
 import threading
 import queue
 import time
+import os
 
 app = Flask(__name__)
 
@@ -17,10 +18,12 @@ def return_correct_page(lang, page_name):
 
 output_queue = queue.Queue()
 
+
+#script_path = os.path.join(os.path.dirname(__file__), "script.py")
 def run_sensor_script():
   try:
     process = subprocess.Popen(
-      ["python", "script.py"],
+      ["python", "./script.py"],
       stdout=subprocess.PIPE,
       stderr=subprocess.PIPE,
       universal_newlines=True,
