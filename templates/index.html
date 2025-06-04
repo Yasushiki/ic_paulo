@@ -1,0 +1,60 @@
+<!doctype html>
+
+<!-- PÁGINA EM PORTUGUÊS -->
+{% if lang == "pt" %}
+<title>Detector atmosférico</title>
+<p>Temperatura: <span id="temperatura">-----</span></p>
+<p>Umidade: <span id="umidade">-----</span></p>
+
+<!-- PÁGINA EM INGLÊS -->
+{% else %}
+<title>Atmospheric detector</title>
+<p>Temperature: <span id="temperatura">-----</span></p>
+<p>Humidity: <span id="umidade">-----</span></p>
+<a href="/en/about">About!</a>
+
+{% endif %}
+
+<script>
+let eventSource = null;
+
+function connectToStream() {
+    if (eventSource) {
+        eventSource.close();
+    }
+    
+    eventSource = new EventSource('/sensor-stream');
+    
+    eventSource.onmessage = function(event) {
+        if (event.data.trim()) {
+            updateValues(event.data);
+        }
+    };
+    
+    eventSource.onerror = function() {
+        console.log('Erro na conexão');
+    };
+}
+
+function updateValues(data) {
+    // Pega as partes da string que você quer
+    const temperatura = data.slice(5, 21);
+    const umidade = data.slice(35, 38);
+    
+    // Atualiza os valores na página
+    document.getElementById('temperatura').textContent = temperatura;
+    document.getElementById('umidade').textContent = umidade;
+}
+
+// Auto-conecta ao carregar a página
+window.onload = function() {
+    setTimeout(connectToStream, 500);
+};
+
+// Limpa conexão ao fechar a página
+window.onbeforeunload = function() {
+    if (eventSource) {
+        eventSource.close();
+    }
+};
+</script>
