@@ -36,14 +36,20 @@ function connectToStream() {
     };
 }
 
+function comecaComNumero(valor) {
+  return !isNaN(parseFloat(valor));
+}
+
 function updateValues(data) {
     // Pega as partes da string que você quer
     const temperatura = data.slice(5, 21);
     const umidade = data.slice(35, 38);
     
-    // Atualiza os valores na página
-    document.getElementById('temperatura').textContent = temperatura;
-    document.getElementById('umidade').textContent = umidade;
+    if (comecaComNumero(umidade)) {
+        // Atualiza os valores na página
+        document.getElementById('temperatura').textContent = temperatura;
+        document.getElementById('umidade').textContent = umidade;
+    }
 }
 
 // Auto-conecta ao carregar a página
