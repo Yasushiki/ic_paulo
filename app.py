@@ -20,7 +20,7 @@ output_queue = queue.Queue()
 def run_sensor_script():
   try:
     process = subprocess.Popen(
-      ["python3", "dht11-raspberry-pi.py"],
+      ["python3", "script.py"],
       stdout=subprocess.PIPE,
       stderr=subprocess.PIPE,
       universal_newlines=True,
