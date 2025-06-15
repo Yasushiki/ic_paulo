@@ -1,13 +1,25 @@
-<!doctype html>
+{% extends "base.html" %}
 
-<!-- PÁGINA EM PORTUGUÊS -->
+{% block title %}
+{% if lang == "pt" %}Sobre{% elif lang == "ja" %}について{% else %}About{% endif %}
+{% endblock %}
+
+{% block content %}
+
 {% if lang == "pt" %}
-<title>Sobre</title>
-<p>I've tryed so hard and got so far</p>
+<p>Professor orientador: <a target="_blank" href="https://ragomes.if.ufg.br/">Dr. Ricardo Avelino Gomes</a></p>
+<p>Pesquisador: <a target="_blank" href="http://lattes.cnpq.br/2061185779068309">Paulo Henrique Alves Cesário Filho</a></p>
+<p>Programador: <a target="_blank" href="https://github.com/Yasushiki">Victor Gabriel Rodrigues Ribeiro</a></p>
 
-<!-- PÁGINA EM INGLÊS -->
+{% elif lang == "ja" %}
+<p>指導教員: <a target="_blank" href="https://ragomes.if.ufg.br/">Ricardo Avelino Gomes先生</a></p>
+<p>研究者: <a target="_blank" href="http://lattes.cnpq.br/2061185779068309">Paulo Henrique Alves Cesário Filhoさん</a></p>
+<p>プログラマー: <a target="_blank" href="https://github.com/Yasushiki"><ruby>我龍紅<rp>(</rp><rt>がぶりえう</rt><rp>)</rp></ruby>びくとるさん</a></p>
+
 {% else %}
-<title>About</title>
-<p>But in the end, it doesn't even matter</p>
-
+<p>Advisor: <a target="_blank"href="https://ragomes.if.ufg.br/">Dr. Ricardo Avelino gomes</a></p>
+<p>Researcher: <a target="_blank" href="http://lattes.cnpq.br/2061185779068309">Paulo Henrique Alves Cesário Filho</a></p>
+<p>Programmer: <a target="_blank" href="https://github.com/Yasushiki">Victor Gabriel Rodrigues Ribeiro</a></p>          
 {% endif %}
+
+{% endblock %}

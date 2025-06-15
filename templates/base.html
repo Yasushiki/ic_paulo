@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='icon.ico')}}">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <a target="_blank" href="https://ufg.br"><img src="{{ url_for('static', filename='ufg.png')}}" alt="Logo da UFG" class="logo"></a>
+            <a target="_blank" href="https://if.ufg.br"><img src="{{ url_for('static', filename='ifufg.png')}}" alt="Logo do IF/UFG" class="logo"></a>
+            {% block logo %}{% endblock %}
+        </div>
+        <nav>
+            <a href="/{{lang}}/">{% if lang == "pt" %}Início{% elif lang == "ja"%}トップ{% else %}Home{% endif %}</a>
+            <a href="/{{lang}}/science">{% if lang == "pt" %}Detector e Neutrinos{% elif lang == "ja"%}検出器とニュートリノ{% else %}Detector & Neutrinos{% endif %}</a>
+            <a href="/{{lang}}/about">{% if lang == "pt"%}Sobre{% elif lang == "ja"%}について{% else %}About{% endif %}</a>
+                <div class="lang-switcher">
+                    {% for code, name in langs.items() %}
+                        {% if code != lang %}
+                            {% set path_parts = request.path.split("/")[2:] %}
+                            <a href="/{{ code }}/{{ path_parts | join('/') }}">{{ name }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

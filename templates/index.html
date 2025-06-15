@@ -1,19 +1,22 @@
-<!doctype html>
+{% extends "base.html" %}
 
-<!-- PÁGINA EM PORTUGUÊS -->
-{% if lang == "pt" %}
-<title>Detector atmosférico</title>
-<p>Temperatura: <span id="temperatura">-----</span></p>
-<p>Umidade: <span id="umidade">-----</span></p>
+{% block title %}
+{% if lang == "pt" %}Detector Atmosférico{% elif lang == "ja" %}大気検出器{% else %}Atmospheric Detector{% endif %}
+{% endblock %}
 
-<!-- PÁGINA EM INGLÊS -->
-{% else %}
-<title>Atmospheric detector</title>
-<p>Temperature: <span id="temperatura">-----</span></p>
-<p>Humidity: <span id="umidade">-----</span></p>
-<a href="/en/about">About!</a>
+{% block content %}
+<section class="sensor-data">
+    <p>
+        {% if lang == "pt" %}Temperatura:{% elif lang == "ja"%}気温：{% else %}Temperature:{% endif %}
+        <span id="temperature">-----</span>
+    </p>
+    <p>
+        {% if lang == "pt" %}Umidade:{% elif lang == "ja"%}湿度：{% else %}Humidity:{% endif %}
+        <span id="humidity">-----</span>
+    </p>
+</section>
+{% endblock %}
 
-{% endif %}
 
 <script>
 let eventSource = null;
@@ -32,7 +35,7 @@ function connectToStream() {
     };
     
     eventSource.onerror = function() {
-        console.log('Erro na conexão');
+        console.log('Connection error');
     };
 }
 
@@ -41,23 +44,19 @@ function comecaComNumero(valor) {
 }
 
 function updateValues(data) {
-    // Pega as partes da string que você quer
-    const temperatura = data.slice(5, 21);
-    const umidade = data.slice(35, 38);
+    const humidity = data.slice(5, 21);
+    const temperature = data.slice(35, 38);
     
-    if (comecaComNumero(umidade)) {
-        // Atualiza os valores na página
-        document.getElementById('temperatura').textContent = temperatura;
-        document.getElementById('umidade').textContent = umidade;
+    if (comecaComNumero(humidity)) {
+        document.getElementById('temperature').textContent = temperature;
+        document.getElementById('humidity').textContent = humidity;
     }
 }
 
-// Auto-conecta ao carregar a página
 window.onload = function() {
     setTimeout(connectToStream, 500);
 };
 
-// Limpa conexão ao fechar a página
 window.onbeforeunload = function() {
     if (eventSource) {
         eventSource.close();

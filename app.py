@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, Response
+from flask import Flask, render_template, redirect, Response, request
 import subprocess
 import threading
 import queue
@@ -7,19 +7,28 @@ import os
 
 app = Flask(__name__)
 
+SUPPORTED_LANGS = {
+  "en": "English",
+  "pt": "Português",
+  "ja": "日本語"
+}
+
 def is_lang_valid(lang):
-  return lang in ["en", "pt"]
+  return lang in SUPPORTED_LANGS.keys()
 
 def return_correct_page(lang, page_name):
   if is_lang_valid(lang):
-    return render_template(f'{page_name}.html', lang=lang)
+    return render_template(
+      f'{page_name}.html',
+      lang=lang,
+      langs=SUPPORTED_LANGS
+      )
   else:
     return redirect(f'/en/{page_name}')
 
 output_queue = queue.Queue()
 
 
-#script_path = os.path.join(os.path.dirname(__file__), "script.py")
 def run_sensor_script():
   try:
     process = subprocess.Popen(
@@ -31,7 +40,7 @@ def run_sensor_script():
     )
 
     if process.stdout is None:
-      output_queue.put("Erro: stdout não foi capturado corretamente")
+      output_queue.put("Error: stdout is None")
       return
 
     for line in iter(process.stdout.readline, " "):
@@ -44,19 +53,19 @@ def run_sensor_script():
     process.wait()
 
   except FileNotFoundError:
-    output_queue.put("Erro: Script 'a.py' não encontrado no diretório atual")
+    output_queue.put("Error: 'script.py' not found")
   except Exception as e:
-    output_queue.put(f"Erro ao executar script: {str(e)}")
+    output_queue.put(f"Error: {str(e)}")
 
 def generate_sensor_data():
   while True:
     try:
       data = output_queue.get(timeout=2)
-      yield f"data: {data}\n\n"
+      yield f"data: {data}\n"
     except queue.Empty:
-      yield "data: \n\n"
+      yield "data: \n"
     except Exception as e:
-      yield f"data: Erro na transmissão: {str(e)}\n\n"
+      yield f"data: Erro na transmissão: {str(e)}\n"
 
 ##### INDEX/MAIN PAGE #####
 @app.route('/')
@@ -67,18 +76,19 @@ def index(lang="en"):
 ##### NEUTRINOS AND NOvA PAGE #####
 @app.route('/<lang>/science')
 @app.route('/<lang>/ciencia')
+@app.route('/<lang>/kagaku')
 def science(lang="en"):
   return return_correct_page(lang, "science")
 
 ##### ABOUT PAGE #####
 @app.route('/<lang>/about')
 @app.route('/<lang>/sobre')
+@app.route('/<lang>/nitsuite')
 def about(lang="en"):
   return return_correct_page(lang, "about")
 
 @app.route('/sensor-stream')
 def sensor_stream():
-    """Endpoint para transmissão em tempo real"""
     return Response(
         generate_sensor_data(),
         mimetype='text/event-stream',
@@ -91,4 +101,3 @@ def sensor_stream():
 
 sensor_thread = threading.Thread(target=run_sensor_script, daemon=True)
 sensor_thread.start()
-app.run(debug=True, host='0.0.0.0', port=5000)

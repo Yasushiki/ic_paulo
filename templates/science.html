@@ -1,24 +1,59 @@
-<!doctype html>
+{% extends "base.html" %}
 
-<!-- PÁGINA EM PORTUGUÊS -->
+{% block title %}
+{% if lang == "pt" %}Detector e Neutrinos{% elif lang == "ja" %}検出器とニュートリノ{% else %}Detector & Neutrinos{% endif %}
+{% endblock %}
+
+{% block logo %}
+<a target="_blank" href="https://www.fnal.gov/"><img src="{{ url_for('static', filename='fermilab.png')}}" alt="Logo do Fermilab" class="logo"></a>
+{% endblock %}
+
+{% block content %}
+
 {% if lang == "pt" %}
-<title>A ciência por trás</title>
-<h1>Neutrinos e NOvA</h1>
-<h2>Neutrinos</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce consequat tortor sit amet placerat viverra. Mauris ac diam vitae nulla.</p>
+<h1>Conteúdo</h1>
+Esse é o conteúdo.
+Duis ut sit duis anim deserunt non aliquip nisi ullamco. Non nostrud elit reprehenderit excepteur quis occaecat proident pariatur laborum commodo minim adipisicing sunt minim. Lorem esse proident tempor voluptate. Culpa ea esse voluptate labore enim irure id laboris occaecat officia consequat id. Lorem non deserunt laborum laborum pariatur ullamco aliquip aute veniam Lorem exercitation fugiat sint ut.
 
-<h2>NOvA</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce consequat tortor sit amet placerat viverra. Mauris ac diam vitae nulla.</p>
+Consectetur Lorem quis occaecat proident eu aliqua elit est sit et est. Voluptate labore anim esse enim qui ex exercitation aliquip commodo non ut. Id do quis cupidatat consectetur minim magna. Dolor dolor et elit elit consequat occaecat laboris. Cupidatat laboris quis ex dolor velit ut mollit ullamco. Anim laboris nulla enim Lorem reprehenderit reprehenderit pariatur esse amet sit nulla nostrud ad. Esse laborum aliquip eu sit anim nostrud est.
 
-<!-- PÁGINA EM INGLÊS -->
+Eu amet ullamco adipisicing laborum laborum sit ipsum ea minim ut laboris culpa. Velit velit laboris velit in sit. Proident irure irure non ullamco eiusmod enim elit dolor ex anim anim duis minim.
+
+Proident consequat mollit nisi Lorem in aute. Nulla occaecat voluptate tempor anim quis reprehenderit eiusmod officia laborum labore ea. Sit cupidatat nisi minim labore do. Incididunt occaecat ad duis ipsum mollit velit nisi cupidatat Lorem ut reprehenderit anim sint incididunt. Qui veniam tempor deserunt ipsum.
+
+Officia reprehenderit qui aliqua Lorem. Nulla sint consequat elit consectetur. Mollit ad ea nisi proident. Ea cillum ad et laboris anim ullamco. Veniam sit consectetur aliqua magna laborum aliquip aliqua laborum irure dolore sint esse dolore. Irure id elit aute exercitation nostrud amet reprehenderit cupidatat ut nulla. Mollit ipsum labore cillum magna magna ullamco deserunt excepteur sit ad cillum ullamco occaecat eu.
+
+<h1>Conteúdo 2</h1>
+Laborum ea culpa aute adipisicing reprehenderit non irure sunt aliquip eiusmod irure consequat. Occaecat officia aliqua ut nostrud labore minim qui occaecat. Velit ut ipsum deserunt commodo amet adipisicing irure sit esse. Eiusmod consectetur aliquip est ad consectetur.
+
+Id in non est ut irure excepteur laborum magna laboris nostrud dolore cupidatat cillum. Nulla irure quis esse est reprehenderit laborum aliquip excepteur nostrud commodo. Ad tempor aute eiusmod ipsum. Aliquip ad et cillum do. Consequat aliquip fugiat nostrud irure labore sint reprehenderit. Occaecat nulla sunt dolore velit in. Eiusmod irure eu aliquip excepteur laborum adipisicing ut adipisicing ea consectetur id reprehenderit aliquip.
+
+Ullamco velit eu non labore ut proident duis mollit nulla labore nisi in magna tempor. Dolor commodo elit magna sint fugiat aute ad in et in velit labore do nostrud. Ut minim adipisicing elit exercitation dolore commodo veniam aliquip qui qui cupidatat culpa ea. Ex dolore mollit voluptate nulla commodo laboris mollit duis dolor mollit sit. Qui duis esse sunt ullamco nulla Lorem nulla aliqua eu dolore aliqua. Nostrud aliquip et mollit incididunt occaecat et duis. Dolore ad voluptate ipsum laboris est qui id ipsum.
+
+Labore reprehenderit incididunt ex ut adipisicing culpa excepteur commodo consequat cillum tempor elit ullamco. Commodo reprehenderit laborum officia dolore sit ut elit pariatur occaecat amet consectetur voluptate cupidatat ut. Cupidatat laboris enim pariatur adipisicing ut ipsum et veniam sit ipsum aliquip anim Lorem incididunt. Consectetur exercitation id est non nulla Lorem aliqua. Id aliquip id sit anim ad mollit non ullamco labore.
+
+Amet ad cupidatat ipsum nulla cillum sit. Minim ipsum in incididunt cupidatat laboris sunt sunt duis magna Lorem in. Tempor consequat incididunt anim exercitation eu enim cillum duis laboris quis ea. Elit magna sint ad exercitation dolor aliquip. Aliqua veniam anim occaecat excepteur consequat. Dolor veniam incididunt ex ea officia laborum consequat sit duis excepteur veniam ipsum excepteur deserunt. Officia et minim ex exercitation est occaecat labore excepteur eiusmod anim.
+
+Dolor sit non officia non. Ex veniam veniam exercitation magna dolore esse ut adipisicing cupidatat ex. Magna eu pariatur do excepteur est occaecat est esse do commodo officia.
+
+Deserunt dolor sit dolor deserunt amet. Irure consectetur dolor do irure duis. Occaecat ut commodo dolore do consectetur reprehenderit dolor ipsum. Do incididunt sit eu labore anim adipisicing. Velit sint tempor amet pariatur occaecat consectetur occaecat id in Lorem ex. Dolore ad sint consectetur ullamco anim ut sunt exercitation ad amet incididunt elit. Nisi tempor Lorem elit culpa eu aliquip eu qui proident nulla veniam.
+
+<h2>Conteúdo 3</h2>
+<p class="text-plain">Nostrud voluptate dolore nulla cupidatat anim dolor eiusmod fugiat cupidatat quis sunt exercitation incididunt. Proident sit id deserunt elit cillum consequat duis culpa aute. Deserunt mollit veniam culpa nostrud incididunt Lorem id aliquip commodo aliqua do eu.
+
+Officia duis id reprehenderit id irure enim et elit exercitation cillum nulla. Aliqua amet commodo proident ut labore. Proident in culpa magna qui voluptate duis anim irure et labore mollit. Occaecat anim cupidatat in reprehenderit. Est magna mollit laborum cillum Lorem in aute eiusmod consequat nulla. Minim amet eiusmod aliqua nostrud adipisicing in. Eiusmod enim sunt cupidatat consequat deserunt deserunt laborum.</p>
+
+<p class="text-plain">Cillum aliquip labore magna fugiat quis nostrud aliquip excepteur voluptate reprehenderit deserunt eu enim.</p>
+<p class="text-plain">Cillum aliquip labore magna fugiat quis nostrud aliquip excepteur voluptate reprehenderit deserunt eu enim.</p>
+<p class="text-plain">Cillum aliquip labore magna fugiat quis nostrud aliquip excepteur voluptate reprehenderit deserunt eu enim.</p>
+
+{% elif lang == "ja" %}
+<h1>内容</h1>
+それは内容です。
+
 {% else %}
-<title>The science behind</title>
-<h1>Neutrinos and NOvA</h1>
-<h2>Neutrinos</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce consequat tortor sit amet placerat viverra. Mauris ac diam vitae nulla.</p>
-
-<h2>NOvA</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce consequat tortor sit amet placerat viverra. Mauris ac diam vitae nulla.</p>
-
+<h1>Content</h1>
+This is the content.
 {% endif %}
 
+{% endblock %}
