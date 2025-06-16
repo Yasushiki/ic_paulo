@@ -8,15 +8,13 @@
 <section class="sensor-data">
     <p>
         {% if lang == "pt" %}Temperatura:{% elif lang == "ja"%}気温：{% else %}Temperature:{% endif %}
-        <span id="temperature">-----</span>
+        <span id="temperatura">-----</span>
     </p>
     <p>
         {% if lang == "pt" %}Umidade:{% elif lang == "ja"%}湿度：{% else %}Humidity:{% endif %}
-        <span id="humidity">-----</span>
+        <span id="umidade">-----</span>
     </p>
 </section>
-{% endblock %}
-
 
 <script>
 let eventSource = null;
@@ -27,7 +25,7 @@ function connectToStream() {
     }
     
     eventSource = new EventSource('/sensor-stream');
-    
+
     eventSource.onmessage = function(event) {
         if (event.data.trim()) {
             updateValues(event.data);
@@ -44,12 +42,12 @@ function comecaComNumero(valor) {
 }
 
 function updateValues(data) {
-    const humidity = data.slice(5, 21);
-    const temperature = data.slice(35, 38);
-    
-    if (comecaComNumero(humidity)) {
-        document.getElementById('temperature').textContent = temperature;
-        document.getElementById('humidity').textContent = humidity;
+    const temperatura = data.slice(5, 21);
+    const umidade = data.slice(35, 38);
+
+    if (comecaComNumero(umidade)) {
+        document.getElementById('temperatura').textContent = temperatura;
+        document.getElementById('umidade').textContent = umidade;
     }
 }
 
@@ -63,3 +61,5 @@ window.onbeforeunload = function() {
     }
 };
 </script>
+
+{% endblock %}

@@ -36,14 +36,14 @@ def run_sensor_script():
       stdout=subprocess.PIPE,
       stderr=subprocess.PIPE,
       universal_newlines=True,
-      bufsize=1
+      bufsize=0
     )
 
     if process.stdout is None:
       output_queue.put("Error: stdout is None")
       return
 
-    for line in iter(process.stdout.readline, " "):
+    for line in iter(process.stdout.readline, ""):
       if line:
         clean_line = line.strip()
 
@@ -61,11 +61,11 @@ def generate_sensor_data():
   while True:
     try:
       data = output_queue.get(timeout=2)
-      yield f"data: {data}\n"
+      yield f"data: {data}\n\n"
     except queue.Empty:
-      yield "data: \n"
+      yield "data: \n\n"
     except Exception as e:
-      yield f"data: Erro na transmissão: {str(e)}\n"
+      yield f"data: Erro na transmissão: {str(e)}\n\n"
 
 ##### INDEX/MAIN PAGE #####
 @app.route('/')
